@@ -1,0 +1,183 @@
+# 接口
+
+#### 1.如果一个类中的所有方法均为abstract方法，那么这个类就可以声明为接口。
+
+**public abstract class** MyClass { 
+
+**public abstract void** show(); 
+
+**public abstract** String fun(); 
+
+**public abstract int** [] method(); 
+
+}
+
+也可以改用如下代码
+
+**public interface** MyInterface { 
+
+**void** show(); 
+
+String fun(); 
+
+**int** [] method(); 
+
+} 
+
+#### 2.接口中可以包含抽象方法，非抽象方法(jdk1.8之前不行)，属性(public static final)常量,public static final 可以省略。
+
+JDK1.8新特性 ,必须使用default关键字 
+
+**public default void** method2(){ 
+
+}
+
+#### 3.接口不可以包含构造方法，因为接口不是类。
+
+#### 4.类与接口的关系
+
+(1)类去实现接口中的抽象方法，实现关系
+
+**public class** InterfaceImpl **implements** 
+
+MyInterface{ 
+
+ //实现接口中的所有抽象方法 
+
+}
+
+(2)一个类既存在继承关系，又存在实现关系，继承在前，实现在后。
+
+**public class** Stuent **extends** Person **implements** 
+
+Play{}
+
+(3) 如果父类与接口中有完全相同的方法(一模一样)，子类
+
+/实现类所实现的方法是父类的？接口的？ 
+
+父类优先于接口，子类实现的是父类中的方法 
+
+(4) 如果父类中与接口中有同名方法，对子类/实现类有什
+
+么要求呢？ 
+
+父类与接口中的方法，在子类/实现类中构成方法的重载。
+
+#### 5.接口的特征
+
+(1)接口的传递性
+
+**public interface** InterfaceA { 
+
+**public void** show(); 
+
+} 
+
+**interface** InterfaceB **extends** InterfaceA{ 
+
+} 
+
+**interface** InterfaceC **extends** InterfaceB{ 
+
+} 
+
+**class** Impl **implements** InterfaceC{ 
+
+@Override 
+
+**public void** show() { 
+
+​     } 
+
+} 
+
+(2)接口的继承性(多继承)
+
+**public interface** InterfaceA { 
+
+**public void** show(); 
+
+} 
+
+**interface** InterfaceB { 
+
+} 
+
+**interface** InterfaceC **extends** 
+
+InterfaceB**,**InterfaceA{ 
+
+} 
+
+**class** Impl **implements** InterfaceC{ 
+
+@Override 
+
+**public void** show() { 
+
+   } 
+
+}
+
+#### 6.使用接口的意义
+
+可以实现设计和实现的分离，抽象出 N 多不同类的共同点，接口体现的是一种能力。
+
+举例：飞机，鸟，球，导弹，宇宙飞船
+
+继承：is a关系   三角形 is a 几何图形 
+
+ 鸟 is a 球? 不成立 
+
+接口 : has a关系 手机 has a 拍照的功能 
+
+ 飞机 has a 飞行的能力 ；鸟 has a 飞行的能力
+
+**public interface** Fly { 
+
+**public void** flying();//飞行的能力 
+
+} 
+
+**class** AirPlane **implements** Fly{ 
+
+@Override 
+
+**public void** flying() { 
+
+System.**out**.println("飞机在祖国的蓝天上自由飞 翔..........."); 
+
+   } 
+
+} 
+
+**class** Bird **implements** Fly{ 
+
+@Override 
+
+**public void** flying() { 
+
+System.**out**.println("小鸟唱着动听的歌，在天空飞....... "); 
+
+   } 
+
+}
+
+**class** test{
+	**public static void** main(String[] args) {
+		Play airplane=**new** AirPlane();
+		Play bird=**new** Bird();
+		airplane.flying();
+		bird.flying();
+	}
+}
+
+#### 7.使用接口实现多态的步骤
+
+(1) 编写接口 
+
+(2) 实现类实现接口中的方法 
+
+(3) 接口(类型)new 实现类对象
+

@@ -1,0 +1,77 @@
+内部类分为成员内部类，方法内部类，静态内部类，匿名内部类
+
+(1)成员内部类
+
+内部类相当于外部类的成员 
+
+`public static void main(String[] args) {
+	Outer f=new Outer();
+    Inner n=f.new Inner();`
+
+(2)方法内部类
+
+只能在方法中使用，相当于方法中的局部变量 
+
+   `public class Outer {`
+   `public void show(){`
+	   `final int a=13;`
+	   `class Inner{`
+		  `public void show(){`
+			  `System.out.println("a="+a);`
+		  `}`
+	   `}`
+	   `new Inner().show();`
+   `}`
+`}`
+
+`public class test1 {
+
+	public static void main(String[] args) {
+		Outer o=new Outer();
+		o.show();
+	}
+
+}`
+
+(3)静态内部类
+
+不允许访问外部类的非static属性，如果内部类中的方法为static方法，那么内部类也必须是静态的。
+
+public class Outerstatic {
+   private static String name="lisi";
+   static class Inner{
+	  public  void show()
+	  {
+		  System.out.println(name);
+	  }
+   }
+}
+
+public class test {
+   public static void main(String[] args) {
+	Outerstatic.Inner s=new Outerstatic.Inner();
+	s.show();
+  }
+}
+
+(4)匿名内部类
+
+a) 可以实现一个接口，或者继承一个父类 
+
+b) 只能实现一个接口 
+
+c) 适合创建那种只需要一次使用的类，不能重复使用。 比较常见的是在图形界面编程 GUI 里用得到。
+
+`public  abstract class Outer {
+   public abstract void show();
+}
+class test{
+	public static void main(String[] args) {
+		Outer o=new Outer(){
+			public void show(){
+				System.out.println("shabi");
+			}
+		};
+		o.show();
+	}
+}`
