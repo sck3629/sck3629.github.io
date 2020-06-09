@@ -1,0 +1,100 @@
+public class TestDOM4J {
+   public static void main(String[] args) throws DocumentException {
+	**//1.创建SAXReader对象**
+	   SAXReader reader = new SAXReader();
+	**//2.调用read方法**
+	   Document doc = reader.read(new File("book.xml"));
+	**//3.获取根元素**
+	   Element root = doc.getRootElement();
+	**//4.通过遍历直接子节点**
+	   for(Iterator<Element> iteBook = root.elementIterator(); iteBook.hasNext();){
+		   Element bookEle = iteBook.next();
+		   //System.out.println(bookEle.getName());
+		   for(Iterator<Attribute> iteAttr = bookEle.attributeIterator(); iteAttr.hasNext();){
+			   Attribute attr = iteAttr.next();
+			   System.out.println(attr.getName() + "\t" + attr.getText());
+		   }
+	   }
+	   System.out.println("--------------------------");
+	   List<Book> list = new ArrayList<>();
+	   for(Iterator<Element> iteBook = root.elementIterator(); iteBook.hasNext();){
+		   **//创建Book对象**
+		   Book book = new Book();
+		   Element bookEle = iteBook.next();**//得到每一个book元素**
+		   for(Iterator<Element> subBookEle = bookEle.elementIterator(); subBookEle.hasNext();){
+			   **//得到每一个子元素**
+			   Element subBook = subBookEle.next();
+			   System.out.println(subBook.getName() + "\t" + subBook.getText());
+			   /***
+
+			    * 封装成book对象
+			    */
+			   **//获取节点的名称**
+			   String nodeName = subBook.getName();**//name,author,price**
+			   switch (nodeName) {
+			   case "name":
+				   book.setName(subBook.getText());
+				   break;
+			   case "author":
+				   book.setAuthor(subBook.getText());
+				   break;
+			   case "price":
+				   book.setPrice(Double.parseDouble(subBook.getText()));
+		       break;
+			}
+		   }
+		   list.add(book);
+	   }
+	   System.out.println("---------------------------");
+	   for(Book book : list){
+		   System.out.println(book.getName()+"\t"+book.getAuthor()+"\t"+book.getPrice());
+	
+	​     }
+	
+	   }
+	
+	}
+
+
+
+
+
+
+
+
+
+package pojo;
+
+public class Book {
+  private String name;
+  private String author;
+  private double price;
+public Book(String name, String author, double price) {
+	super();
+	this.name = name;
+	this.author = author;
+	this.price = price;
+}
+public String getName() {
+	return name;
+}
+public Book() {
+	super();
+	
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getAuthor() {
+	return author;
+}
+public void setAuthor(String author) {
+	this.author = author;
+}
+public double getPrice() {
+	return price;
+}
+public void setPrice(double price) {
+	this.price = price;
+}
+}

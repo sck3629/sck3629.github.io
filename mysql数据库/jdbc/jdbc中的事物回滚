@@ -1,0 +1,21 @@
+**//事物处理**
+     public void deleteDepartments(String departmentName){
+    	 Connection conn = null;
+    	 PreparedStatement ps = null;
+    	 try{
+    		 conn = JdbcUtil.getConnection();
+    		 **//关闭事物的自动提交**
+    		 **conn.setAutoCommit(false);**
+    		 ps = conn.prepareStatement("delete from departments where department_name like ?");
+    		 ps.setString(1, "%"+departmentName+"%");
+    		 ps.execute();
+    		 **conn.commit();**
+    	 }catch(Exception e){
+    		 e.printStackTrace();
+    		 //事物的回滚，如果sql语句未提交，则回滚到sql语句执行之前
+    		 **JdbcUtil.rollback(conn);**
+    	 }finally{
+    		JdbcUtil.releaseResource(ps, conn, null);
+    	 }
+     }
+

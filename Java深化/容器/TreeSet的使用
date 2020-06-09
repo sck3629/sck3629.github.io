@@ -1,0 +1,5 @@
+#### TreeSet 的底层数据结构 
+
+1）TreeMap（key，唯一，而且有序，升序），同理，TreeSet也是key唯一和有序的，底层数据结构 黑红树，而且 TreeMap 中的 key 实际上就是一个 TreeSet，如果使用自定义对象作为 key,要求必须具备比较规则 
+
+2）使用 TreeMap 要求使用内部比较器或外部比较器

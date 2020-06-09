@@ -1,0 +1,16 @@
+#### 1.Map 接口 
+
+实现 Map 接口的类用来存储键(key)-值(value)对; Map 接口的实现类有 HashMap 和 TreeMap等, Map 类中存储的键-值对通过键来标识，所以键不能重复,值可以重复，而且键是无序的，HashMap的key是唯一的，无序的
+
+#### 2.HashMap和Hashtable的区别
+
+（1）版本不同，HashMap的JDK版本是1.2,Hashtable的版本是1.0
+
+（2）HashMap继承了AbstractMap类，实现了Map接口，Hashtable继承了Dictionary，实现了Map接口
+
+（3）HashMap允许NULL的键和值，但是NULL作为key只允许一个，Hashtable不允许NULL的键和值
+
+（4）HashMap是非线程同步的(效率高，安全性低)，Hashtable是线程同步的(效率低，安全性高)
+
+
+

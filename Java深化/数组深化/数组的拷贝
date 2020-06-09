@@ -1,0 +1,17 @@
+1.地址的拷贝
+
+int []arrayA={11,22,33,44};
+
+int []arrayB=new int[5];
+
+arrayB=arrayA;
+
+2.值的拷贝
+
+int []arrayA={11,22,33,44};
+
+int []arrayB=new int[5];
+
+arrayB[0]=arrayA[0];
+
+3.System类中的arraycopy(原数组名,起始位置,目标数组名,起始位置,元素的个数)方法

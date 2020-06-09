@@ -1,0 +1,7 @@
+1.StringBuilder和StringBuffer都是可变的字符串(字符串变量)
+
+2.StringBuilder效率高，非线程安全
+
+   StringBuffer效率低，线程安全
+
+3.javap 是 JDK 自带的一个工具，可以反编译，也可以查看 Java 编译器生成的字节码，是分析代码的一个好工具。javap -c  类名 对代码进行反汇编。

@@ -1,0 +1,63 @@
+package com.bjsxt.test;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.bjsxt.entity.User;
+
+public class Generic {
+	public void test01(Map<String,User> map,List<User> list, String user){
+		System.out.println("test01");
+	}
+	public Map<Object,Integer> test02(){
+		System.out.println("test02");
+		return null;
+	}
+	public String test03(){
+		System.out.println("test03");
+		return null;
+	}
+   public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	/*List<String> list = new ArrayList<>();
+	Class c = list.getClass();
+	Method m = c.getDeclaredMethod("add", Object.class);
+	m.invoke(list, 123);
+	m.invoke(list, "kjkjkj");
+	System.out.println(list);*/
+	Class c = Generic.class;
+	Method test01 = c.getMethod("test01", Map.class, List.class, String.class);
+	Type[] type = test01.getGenericParameterTypes();
+	System.out.println(type.length);
+	for(Type types : type){
+		//System.out.println(types);
+		**//判断是否带有参数类型(泛型)**
+		if(types instanceof ParameterizedType){
+			Type[] genericType = ((ParameterizedType) types).getActualTypeArguments();
+			for(Type genType : genericType){
+				System.out.println(genType);
+			}
+			System.out.println("==========================");
+		}
+	}
+	System.out.println("------------------------------------------");
+    Method test02 = c.getMethod("test02", null);
+    Type returnType = test02.getGenericReturnType();
+    if(returnType instanceof ParameterizedType){
+    	Type[] types = ((ParameterizedType) returnType).getActualTypeArguments();
+    	for(Type typ : types){
+    		System.out.println(typ);
+    	}
+    }
+    System.out.println("------------------------------");
+    Method m3 = c.getMethod("test03", null);
+    Type returnType3 = m3.getGenericReturnType();
+    System.out.println(returnType3);
+    System.out.println(returnType3 instanceof ParameterizedType);
+}
+
+}

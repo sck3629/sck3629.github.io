@@ -1,0 +1,24 @@
+public class TestXPATH {
+   public static void main(String[] args) throws DocumentException {
+	   **//创建SAXReader对象**
+	   SAXReader reader = new SAXReader();
+	   **//通过read方法读取xml文档**
+	   Document doc = reader.read("book.xml");
+	   **//得到第一个author节点**
+	   Node node = doc.selectSingleNode(**"//author"**);
+	   System.out.println("节点的名称为:" + node.getName());
+	   **//得到所有的name节点**
+	   List<Node> nodeList = doc.selectNodes(**"//name"**);
+	   for(Node nod : nodeList){
+		   System.out.println("节点的名称为:" + nod.getName() + "\t节点的值为:" + nod.getText());
+	   }
+       **//选择有id属性的book元素**
+	   List<Attribute> attr = doc.selectNodes(**"//book/@id"**);
+	   for(Attribute att : attr){
+		   System.out.println("属性的名称为:" + att.getName() + "\t属性的值为:" + att.getText());
+	   }
+
+}
+
+}
+

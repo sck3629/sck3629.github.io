@@ -1,0 +1,5 @@
+1.static Thread currentThread() 返回目前正在执行的线程 
+
+2.final String getName() 返回线程的名称 
+
+3.final boolean isAlive() 判断线程是否处于活动状态

@@ -1,0 +1,40 @@
+**1**.**包装类和基本数据类型的对应关系** 
+
+**基本数据类型 包装类** 
+
+byte                Byte 
+
+boolean         Boolean 
+
+short              Short 
+
+char               Character 
+
+int                   Integer 
+
+long                Long 
+
+float                Float 
+
+double           Double
+
+**2**.**为什么需要包装类**(Wrapper Class)
+
+Java 并不是纯面向对象的语言。Java 语言是一个面向对象的语言，但是 Java 中的基本数据类型却是不面向对象的。但是我们在实际使用中经常需要将基本数据转化成对象，便于操作。比如：集合的操作。 这时，我们就需要将基本类型数据转化成对象！
+
+**3.包装类的基本操作**
+
+（1）int ->Integer new Integer(primitive) 
+
+（2）Integer->int Integer 对象.xxxValue() 
+
+（3）Integer->String Integer 对象.toString() 
+
+（4）String->Integer new Integer(String str) 
+
+（5）int->String String.valueOf(primitive) 
+
+（6）String->int Integer.parseXxx()
+
+#### 如果一个类的所有方法和属性均为静态的，那么别的类在调用这个类的时候，可以使用静态导入，格式为(import java.xxx.xxx.*)，静态导入的好处是在调用这个类的方法和属性的时候，不用再使用类名.方法名或者类名.属性名了，可以直接用方法名或者属性名。就是方便！
+

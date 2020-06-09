@@ -1,0 +1,8 @@
+**ByteArrayInutStream** **和** **ByteArrayOutputStream** 
+
+1) 数据源或目的地为：字节数组 
+
+2) 只有字节流，没有字符流 
+
+3) 节点流
+

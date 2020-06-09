@@ -1,0 +1,39 @@
+1.人们对于时间的认识是：某年某月某日，这样的日期概念。 计算机是 long 类型的数字。通过 Calendar 在二者之间搭起桥梁！GregorianCalendar 是 Calendar 的
+
+一个具体子类，提供了世界上大多数国家/地区使用的标准日历系统。 
+
+2.月份：一月是 0，二月是 1，以此类推，12 月是 11 
+
+星期：周日是 1，周一是 2......周六是 7 
+
+#### 以下为编写万年历的代码
+
+public class Test {
+public static void main(String[] args) throws ParseException {
+	Scanner input=new Scanner(System.in);
+	System.out.println("请输入一个日期:yyyy-mm-dd");
+	String str=input.next();//获取控制台输入的内容
+	System.out.println("日\t一\t二\t三\t四\t五\t六");
+	DateFormat df=new SimpleDateFormat("yyyy-MM-dd");//设置格式
+	Date date=df.parse(str);//将String类的对象转换成Date类型的对象
+	Calendar cal=new GregorianCalendar();
+	cal.setTime(date);//将Date对象的日期转换成万年历的日期
+	int nowaday=cal.get(Calendar.DAY_OF_MONTH);
+	cal.set(Calendar.DAY_OF_MONTH,1);//把当前的日期设置为1号，用于编写万年历
+	int dayOfWeek=cal.get(Calendar.DAY_OF_WEEK);
+	int maxDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);//获取当月最后一天是第多少天
+	for(int i=1;i<dayOfWeek;i++){
+		System.out.print("\t");
+	}
+	for(int i=1;i<maxDay;i++){
+		System.out.print(i);
+		if(i==nowaday){System.out.print("*");}
+		System.out.print("\t");
+		if(cal.get(Calendar.DAY_OF_WEEK)==7){
+			System.out.println();
+		}
+		cal.add(Calendar.DAY_OF_MONTH, 1);//每执行一次循环，当前的天数增加一天，因为一开始设置的天数是当月的第一天
+	}
+	
+}
+}

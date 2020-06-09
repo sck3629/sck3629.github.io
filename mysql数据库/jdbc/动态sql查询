@@ -1,0 +1,51 @@
+public class JdbcAdvanced {
+  **//动态查询**
+  public List<Departments> selectDeptByProperty(Departments departments){
+	  Connection conn = null;
+	  PreparedStatement ps =null;
+	  ResultSet rs = null;
+	  List<Departments> list = new ArrayList<>();
+	  try{
+		  conn = JdbcUtil.getConnection();
+		  **String sql = genSQL(departments);**
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  while(rs.next()){
+			  Departments dept = new Departments();
+			  dept.setDepartmentId(rs.getInt("department_id"));
+			  dept.setDepartmentName(rs.getString("department_name"));
+			  dept.setLocationId(rs.getInt("location_id"));
+			  list.add(dept);
+		  }
+	  }catch(Exception e){
+		  e.printStackTrace();
+	  }finally{
+		  JdbcUtil.releaseResource(ps, conn, rs);
+	  }
+	  return list;
+  }
+  **//拼接需要执行的sql语句**
+  public String genSQL(Departments dept){
+	  **StringBuffer sb = new StringBuffer("select * from departments where 1=1 ");**
+	  if(dept.getDepartmentId() > 0){
+		  **sb.append(" and department_id =").append(dept.getDepartmentId());**
+	  }
+	  if(dept.getDepartmentName()!= null && dept.getDepartmentName().length() > 0){
+		  **sb.append(" and department_name = '").append(dept.getDepartmentName()).append("'");**
+	  }
+	  if(dept.getLocationId() > 0){
+		  **sb.append(" and location_id =").append(dept.getLocationId());**
+	  }
+	  return sb.toString();
+  }
+  public static void main(String[] args) {
+	JdbcAdvanced ja = new JdbcAdvanced();
+	Departments dept  = new Departments();
+    dept.setDepartmentId(1);
+    //dept.setDepartmentName("考察部");
+	List<Departments> list = ja.selectDeptByProperty(dept);
+	for(Departments  de : list){
+		System.out.println(de.getDepartmentId()+" "+de.getDepartmentName()+" "+de.getLocationId());
+	}
+}
+}

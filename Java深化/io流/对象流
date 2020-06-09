@@ -1,0 +1,30 @@
+**1.对象序列化 (Serialization)** 
+
+ObjectOutputStream->序列化->写对象，将对象以“二进制/字节”的形式写到（文件） 
+
+ObjectInputStream->反序列化->读对象,将 Java 对象转换成字节序列（IO 字节流） 
+
+对象反序列化 (DeSerialization) 从字节序列中恢复 Java 对象 
+
+**2.为什么序列化** 
+
+序列化以后的对象可以保存到磁盘上，也可以在网络上传输，使得不同的计算机可以共享对象（序列化的字节序列是与平台无关的） 
+
+**3.对象序列化的条件** 
+
+只有实现了 Serializable 接口的类的对象才可以被序列化。 
+
+Serializable 接口中没有任何的方法，实现该接口的类不需要实现额外的方法。 如果对象的属性是对象，属性对应类也必须实现 Serializable接口 
+
+**4.如何实现序列化** 
+
+创建 ObjectOutputStream 对象 
+
+调用 writeObject()输出对象
+
+**5.如何实现反序列化** 
+
+创建 ObjectInputStream 对象 
+
+调用 readObject()读取对象 
+

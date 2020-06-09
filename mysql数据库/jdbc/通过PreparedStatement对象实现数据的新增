@@ -1,0 +1,17 @@
+public class PreparedStatementDemo {
+     public void insertDepartments(String departmentName, int locationId){
+    	 Connection conn = null;
+    	 PreparedStatement ps = null;
+    	 try{
+    		 conn = JdbcUtil.getConnection();
+    		 **ps = conn.prepareStatement("insert into departments values(default, ?, ?)");**
+    		 **ps.setString(1, departmentName);**
+    		 **ps.setInt(2, locationId);**
+    		 **ps.execute();**
+    	 }catch(Exception e){
+    		 e.printStackTrace();
+    	 }finally{
+    		 JdbcUtil.releaseResource(ps, conn, null);
+    	 }
+     }
+

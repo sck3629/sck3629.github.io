@@ -1,0 +1,29 @@
+public class Test {
+   public static void main(String[] args) throws ClassNotFoundException {
+      System.out.println(int.class);
+      int[] arr1 = new int[10];
+      int[] arr2 = new int[20];
+      int[][] arr3 = new int[5][5];
+      System.out.println(arr1==arr2);
+      /**
+       * **维数相同和类型相同的数组共享同一个Class类的对象**
+       */
+      System.out.println(arr1.getClass()==arr2.getClass());
+      System.out.println(arr1.getClass()==arr3.getClass());
+      /***
+       * **同一个类的n多对象共享同一个Class对象**
+       */
+      User u1 = new User();
+      User u2 = new User();
+      System.out.println(u1.getClass()==u2.getClass());
+      /***
+       * **获取Class对象的三种方式**
+       */
+      **//1.通过对象的getClass()方法获取**
+      Class c1 = u1.getClass();
+      **//2.通过字节码文件获取**
+      Class c2 = User.class;
+      **//3.通过Class类的静态方法获取**
+      Class c3 = Class.forName("com.bjsxt.User");
+   }       
+ }

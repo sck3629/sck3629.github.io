@@ -1,0 +1,64 @@
+public **List<Departments>** selectDepartmentsByName(String departmentName){
+    	 Connection conn = null;
+    	 PreparedStatement ps = null;
+    	 ResultSet rs = null;
+    	 **List<Departments> list = new ArrayList<>();**
+    	 try{
+    		 conn = JdbcUtil.getConnection();
+    		 ps = conn.prepareStatement(**"select * from departments where department_name like ?"**);
+    		 **ps.setString(1, "%" + departmentName + "%");**
+    		 rs = ps.executeQuery();
+    		 while(rs.next()){
+    			 **Departments dept = new Departments();**
+    			 dept.setDepartmentId(rs.getInt("department_id"));
+    			 dept.setDepartmentName(rs.getString("department_name"));
+    			 dept.setLocationId(rs.getInt("location_id"));
+    			 **list.add(dept);**
+    		 }
+    	 }catch(Exception e){
+    		 e.printStackTrace();
+    	 }finally{
+    		 JdbcUtil.releaseResource(ps, conn, rs);
+    	 }
+    	 **return list;**
+     }
+
+public static void main(String[] args) {
+		PreparedStatementDemo demo = new PreparedStatementDemo();
+	    List<Departments> list = demo.selectDepartmentsByName("考察");
+	    for(Departments dept : list){
+	    	System.out.println(dept.getDepartmentId() + " " + dept.getDepartmentName() + " " + dept.getLocationId());
+	    }
+
+
+
+package com.bjsxt;
+/***
+ * 数据模型
+ * 用来存放数据库中departments表中的数据
+ * @author S2
+ *
+ */
+public class Departments {
+   private int departmentId;
+   private String departmentName;
+   private int locationId;
+public int getDepartmentId() {
+	return departmentId;
+}
+public void setDepartmentId(int departmentId) {
+	this.departmentId = departmentId;
+}
+public String getDepartmentName() {
+	return departmentName;
+}
+public void setDepartmentName(String departmentName) {
+	this.departmentName = departmentName;
+}
+public int getLocationId() {
+	return locationId;
+}
+public void setLocationId(int locationId) {
+	this.locationId = locationId;
+}
+}

@@ -1,0 +1,19 @@
+**PrintStream** 
+
+1) PrintStream 提供了一系列的 print()和 println()，可以实现 将基本数据类型格式化成字符串输出。对象类型将先调用 toString()，然后输出该方法返回的字符串 
+
+2) System.out 就是 PrintStream 的一个实例，代表显示器 
+
+3) System.err 也是 PrintStream 的一个实例，代表显示器 
+
+4) PrintStream的输出功能非常强大，通常需要输出文本内容， 都可以将输出流包装成 PrintStream 后进行输出 
+
+5) PrintStream 的方法都不抛出 IOException 
+
+**PrintWriter** 
+
+1) PrintStream 的对应字符流，功能相同，方法对应，字符流都是在缓冲区进行转换的(由字节流转换成字符流)，所以要刷新缓冲区
+
+2) PrintWriter 的方法也不抛出 IOException 
+
+3) 复制文件时可以使用PrintWriter代替BufferedWriter完成，更简单

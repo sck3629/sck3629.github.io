@@ -1,0 +1,41 @@
+package xmlProject;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+
+public class TestJDOM {
+    public static void main(String[] args) throws FileNotFoundException, JDOMException, IOException {
+		**//1.创建一个SAXBuilder对象**
+    	SAXBuilder sb = new SAXBuilder();
+    	**//2.调用build方法，得到Document对象(通过IO流)**
+    	Document doc = sb.build(new FileInputStream("book.xml"));
+    	**//3.获取根节点**
+    	Element root = doc.getRootElement();
+    	**//4.获取根节点的直接子节点的集合**
+    	List<Element> bookEle = root.getChildren();**//得到book元素的集合**
+    	**//5.遍历集合**
+    	for(int i = 0; i < bookEle.size(); i++){
+    		Element book = bookEle.get(i);**//得到第i个book元素**
+    		List<Attribute> attrsList = book.getAttributes();**//得到book元素的属性的集合**
+    		for(Attribute attrs : attrsList){
+    			System.out.println("属性的名称:" + attrs.getName() + "\t属性的值:" + attrs.getValue());
+    		}
+    	}
+    	for(int i = 0; i < bookEle.size(); i++){
+    		Element book = bookEle.get(i);
+    		List<Element> subBook = book.getChildren();**//得到book元素的直接子元素的集合**
+    		for(Element ele : subBook){
+    			System.out.println("节点的名称为:" + ele.getName() + "\t节点的值为:" + ele.getValue());
+    		}
+    	}
+	}
+}

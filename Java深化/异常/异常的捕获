@@ -1,0 +1,23 @@
+1.捕获异常使用的关键字:try,catch,finally
+
+2.try-catch-finally的使用
+
+(1)try-catch组合
+
+(a)正常情况:程序执行try和try-catch块后的代码段
+
+(b) 异常情况，异常出现的类型与捕获的类型匹配:程序执行try，catch和try-catch块后的代码段
+
+(c) 异常情况，异常出现的类型与捕获的类型不匹配:程序只执行try和catch的异常类型捕获的那行代码
+
+(2)try-finally组合
+
+finally 是无论是否产生异常，都执行的代码，但是有一种 情况 finally 不执行，即退出 Java 虚拟机(System.exit(0))
+
+(3)try-catch-finally组合
+
+(a) 正常情况：执行 try-finally 
+
+(b) 异常情况：类型相匹配，执行 try-catch-finally 
+
+(c) 异常情况：类型不相匹配，执行 try-finally 如果在 catch 中存在 return 语句，则先执行完 finally 语句 再回头执行 return 语句

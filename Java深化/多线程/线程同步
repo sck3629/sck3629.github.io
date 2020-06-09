@@ -1,0 +1,33 @@
+**1.同步实现的方式 :**
+
+同步代码块 
+
+synchronized(obj){ 
+
+ // obj 称为同步监视器 
+
+} 
+
+**2.同步方法:**同步方法的同步监视器为当前对象 this 
+
+public synchronized void 方法名(参数列表){ 
+
+} 
+
+同步监视器只能是对象，推荐使用共享资源的对象,可以是当前对象 this,也可以是其它的对象
+
+**处在同步代码块中的代码必须全部执行完，不能被其他的线程所抢占，即同步代码块有一把锁，当加锁的时候，只有一个线程可以访问，其他线程都无法访问同步代码块中的内容。**
+
+private synchronized void saleTicket() {
+		if(ticket > 0 ) {
+			 try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 System.out.println(Thread.currentThread().getName()+"正在卖出第" + (ticket--) + "张票");
+			}
+
+}
+

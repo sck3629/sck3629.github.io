@@ -1,0 +1,78 @@
+public class TestSAXParse {
+   public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
+	**//1.创建SAXParserFactory对象**
+	   SAXParserFactory spf = SAXParserFactory.newInstance();
+	**//2.创建SAXParser对象(解析器)**
+	   SAXParser sp = spf.newSAXParser();
+	**//3.创建一个DefaultHandler的子类**
+	   BookDefaultHandler bdh = new BookDefaultHandler();
+	**//4.调用parse方法**
+	   sp.parse("book.xml", bdh);
+   }   
+
+}
+
+
+
+
+
+package xmlProject;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class BookDefaultHandler extends DefaultHandler {
+	**//开始解析xml文档时调用**
+	public void startDocument() throws SAXException {
+		// TODO Auto-generated method stub
+		super.startDocument();
+		System.out.println("开始解析xml文档");
+	}
+	**//结束解析xml文档时调用**
+	public void endDocument() throws SAXException {
+		// TODO Auto-generated method stub
+		super.endDocument();
+		System.out.println("结束解析xml文档");
+	}
+	/***
+	 * **开始解析xml文档中的节点时调用，并获取节点的属性和属性值和节点的名称**
+	 */
+	public void startElement(String uri, String localName, String qName,
+			Attributes attributes) throws SAXException {
+		// TODO Auto-generated method stub
+		super.startElement(uri, localName, qName, attributes);
+		//System.out.println("开始解析xml文档中的节点");
+		if("book".equals(qName)){
+			int count = attributes.getLength();
+			for(int i = 0; i < count; i++){
+				String name = attributes.getQName(i);
+				String value = attributes.getValue(i);
+				System.out.println("属性的名称为:" + name + "\t" + "属性的值为:" + value);
+			}		
+
+}else if(!"book".equals(qName) && !"books".equals(qName)){
+	System.out.print("节点的名称:" + qName + "\t");
+  }
+
+}
+/***
+	 * **结束解析xml文档中的节点时调用**
+	 */
+	public void endElement(String uri, String localName, String qName)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		super.endElement(uri, localName, qName);
+		//System.out.println("结束解析xml文档中的节点");
+	}
+  * **//获取节点中的文本值**
+	 * public void characters(char[] ch, int start, int length)
+	 		throws SAXException {
+		// TODO Auto-generated method stub
+		super.characters(ch, start, length);
+		String value = new String(ch, start, length);
+		if(!"".equals(value.trim())){
+			System.out.println("节点的值:" + value);
+		}
+
+​      }

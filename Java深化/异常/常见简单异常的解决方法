@@ -1,0 +1,25 @@
+1.运行时异常 **RuntimeException** 
+
+a) 算术异常 ArithmeticException 
+
+b) 空指针异常 NullPointerException 
+
+c) 类型转换异常 ClassCastException 
+
+d) 数组下标越界 ArrayIndexOutOfBoundsException 
+
+e) 期 望 的 数 据 类 型 与 实 际 输 入 类 型 不 匹 配 InputMismatchException 
+
+2.检查时异常 **Checked Exception** 
+
+a) SQLException 
+
+b) IOException 
+
+c) ParseException 
+
+要求必须做处理
+
+（1） throws 向上声明 
+
+（2） try-catch-finally

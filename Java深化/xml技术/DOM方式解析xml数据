@@ -1,0 +1,51 @@
+public class TestDOMParse {
+   public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+	**//1.创建一个DocumentBuilderFactory对象**
+	   DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	**//2.创建一个DocumentBuilder对象**
+	   DocumentBuilder db = dbf.newDocumentBuilder();
+	**//3.通过DocumentBuilder的parse()方法得到Document对象**
+	   Document doc = db.parse("book.xml");
+	**//4.通过getElementsByTagName()方法获取到节点的列表**
+	   NodeList bookList = doc.getElementsByTagName("book");
+	   //System.out.println(bookList.getLength());
+	**//5.通过for循环遍历每一个节点**
+	   for(int i = 0; i < bookList.getLength(); i++){
+		   **//6.得到每个节点的属性和属性值**
+		   Node book = bookList.item(i);
+		   NamedNodeMap attrs = book.getAttributes();**//得到了属性的集合**
+		   **//循环遍历每一个属性**
+		   for(int j = 0; j < attrs.getLength(); j++){
+			   Node id = attrs.item(j);
+			   System.out.println("属性的名称:" + id.getNodeName() + "\t" + "属性的值:" + id.getNodeValue());
+		   }
+	   }
+	**//7.得到每个节点的子节点名和子节点值**
+	   for(int i = 0; i < bookList.getLength(); i++){
+		   Node book = bookList.item(i);
+		   NodeList subNode = book.getChildNodes();
+		   System.out.println(subNode.getLength());
+		   for(int j = 0; j < subNode.getLength(); j++){
+			   Node childNode = subNode.item(j);
+			   short type = childNode.getNodeType();**//获取节点的类型**
+			   if(type == Node.ELEMENT_NODE){
+			     System.out.println("节点的名称:" + childNode.getNodeName() + "\t" + "节点的值:" + childNode.getTextContent());
+			   }
+		   }
+	   }
+}
+}
+
+**<?xml version="1.0" encoding="UTF-8"?>**
+**<books xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="{book.xsd}">**
+	**<book id="111">**
+		**<name>java实战</name>**
+		**<author>zhangshan</author>**
+		**<price>34</price>**
+	**</book>**
+	**<book id="222">**
+		**<name>python实战</name>**
+		**<author>lisi</author>**
+		**<price>44.5</price>**
+	**</book>**
+**</books>**

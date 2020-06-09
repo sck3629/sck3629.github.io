@@ -1,0 +1,4 @@
+1.String 的底层数据结构是 char 类型的数组,String 的相方法的实现实际上就是对数组的一个操作
+
+#### 2.a.concat();a就是concat方法当中value。str.getChars;str就是getChars方法中的value
+

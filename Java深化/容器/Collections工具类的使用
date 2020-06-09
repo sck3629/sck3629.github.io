@@ -1,0 +1,29 @@
+**Collections** **工具类的使用** 
+
+专门用来操作集合的工具类 
+
+构造方法私有，禁止创建对象 
+
+提供一系列静态方法实现对各种集合的操作 
+
+具体操作：搜索、复制、排序、线程安全化等 
+
+**常用方法** 
+
+a) Collections.addAll(list, "aaa","bbb","ccc","ccc"); //**将多个元素添加到list对象中**
+
+b) int index = Collections.binarySearch(list, "ccc"); //**用二叉搜索查找指定元素在集合中的索引，如未找到，则返回-（插入点+1）**
+
+c) Collections.copy(list2, list); //**将list对象里的所有元素复制到list2中，要求list2对象中的元素的个数要大于等于list对象中的元素**
+
+d) Collections.fill(list3, "888"); //**填充集合内的所有元素**
+
+e) String max = Collections.max(list4); 
+
+f) String min = Collections.min(list4); 
+
+g) Collections.reverse(list4); //**逆向排序**
+
+h) List list5 = Collections.synchronizedList(list4);//**使线程安全化**
+
+i)Collections.sort(list)//**按照英文字母的升序排序**

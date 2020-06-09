@@ -1,0 +1,70 @@
+**
+
+driver =com.mysql.jdbc.Driver**
+**jdbcUrl =jdbc:mysql://localhost:3306/bjsxt?useUnicode=true&characterEncoding=utf-8&useSSL=false**
+**username =root**
+**password =123456**
+
+public class JdbcUtil {
+	private static String driver;
+	private static String jdbcUrl;
+	private static String username;
+	private static String password;
+	static{
+		//读取properties文件中的内容
+		**ResourceBundle bundle = ResourceBundle.getBundle("com.bjsxt.jdbc");**
+		**driver = bundle.getString("driver");**
+		**jdbcUrl = bundle.getString("jdbcUrl");**
+		**username = bundle.getString("username");**
+		**password = bundle.getString("password");**
+		try {
+			**Class.forName(driver);**
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
+
+public static Connection getConnection(){
+	Connection conn = null;
+	try {
+		**conn = DriverManager.getConnection(jdbcUrl, username, password);**
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return conn;
+   }
+   public static void closeStatement(Statement state){
+	   if(state!= null){
+		   try {
+			state.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	   }
+   }
+   public static void closeConnection(Connection conn){
+	   if(conn!= null){
+		   try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	   }
+   }
+   public static void closeResultSet(ResultSet rs){
+	   if(rs!= null){
+		   try {
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	   }
+   }
+   public static void releaseResource(Statement state, Connection conn, ResultSet rs){
+	   JdbcUtil.closeStatement(state);
+	   JdbcUtil.closeConnection(conn);
+	   JdbcUtil.closeResultSet(rs);
+   }
+}

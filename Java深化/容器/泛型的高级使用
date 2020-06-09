@@ -1,0 +1,36 @@
+**1** **泛型的高级使用** 
+
+泛型的上限:使用关键字 extends，表示参数化的类型可能是所指定的类型或者是此类型的子类 
+
+泛型的下限:使用关键字 super 进行声明，表示参数化的类型可能是所指定的类型，或者是此类型的父类型，直至 Object类 
+
+public static void print(ArrayList<? extends Teacher> t){//**泛型上限，允许Teacher类以及Teacher类的子类使用该方法**
+	  for(Teacher tc : t){
+		  System.out.println(tc);
+	  }
+  }
+  public static void show(ArrayList<? super Student> t) {//**泛型下限，允许Student类以及Student类的父类使用该方法**
+      for(Object tc : t){
+    	  System.out.println(tc);
+      }		
+ }
+
+**2** **在容器中使用泛型**
+
+public class TestGenerics {
+   public static void main(String[ ] args) {
+	ArrayList<String> al = new ArrayList<String>();
+	al.add("hello");
+	LinkedList<Integer> linkedList = new LinkedList<Integer>();
+	linkedList.add(123);
+	HashSet<Teacher> hs = new HashSet<Teacher>();//**存储自定义对象时，要求Teacher类重写hashCode方法以及equals方法**
+	TreeSet<Teacher> ts = new TreeSet<Teacher>();//**Teacher对象具备比较规则，可以是内部比较器，也可以是外部比较器**
+	HashMap<String, Integer> hm = new HashMap<String, Integer>();
+	hm.put("fdf", 333);
+	HashMap<Teacher, String> hm2 = new HashMap<Teacher, String>();
+	Teacher teacher = new Teacher("zhangshan", 30);
+	hm2.put(teacher, teacher.getName());
+	TreeMap<Teacher, Integer> tm = new TreeMap<Teacher, Integer>();
+	tm.put(teacher, teacher.getAge());
+}
+}

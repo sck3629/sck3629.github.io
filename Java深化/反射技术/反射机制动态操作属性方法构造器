@@ -1,0 +1,89 @@
+package com.bjsxt.test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import com.bjsxt.entity.User;
+
+public class Test1 {
+   public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
+	**//获取Class类的对象**
+	Class c = Class.forName("com.bjsxt.entity.User");
+	**//得到无参构造方法的对象**
+	Constructor con = c.getConstructor(null);
+	**//通过无参构造方法的对象，创建User类的对象**
+	User user = (User) con.newInstance();
+	**//动态操作属性**
+	Field field = c.getDeclaredField("userId");
+	field.setAccessible(true)**;//这个属性不需要做安全检查了，可以直接访问**
+	field.set(user, 1000);**//通过反射直接赋值**
+	System.out.println(field.get(user));**//通过反射直接取值**
+	**//动态操作方法**
+	Method method = c.getMethod("setUserName", String.class);
+	method.invoke(user, "zhangshan");
+	Method m = c.getDeclaredMethod("getUserName", null);
+	System.out.println(m.invoke(user, null));
+  }
+}
+
+
+
+
+
+
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Test {
+  public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, SecurityException, NoSuchMethodException {
+   **//1.获取类的名称**
+   String path = "com.bjsxt.entity.User";
+   Class c = Class.forName(path);
+   System.out.println(c.getSimpleName());
+   System.out.println(c.getName());
+   Class cSuper = c.getSuperclass();**//获取父类的Class对象**
+   System.out.println(cSuper.getSimpleName());
+   System.out.println(cSuper.getName());
+   **//2.获取类的属性信息**
+   Field f = c.getField("userId");**//只能获取公共的属性**
+   System.out.println(f);
+   Field[] field = c.getFields();**//只能获取公共的属性**
+   System.out.println(field.length);
+   Field[] field1 = c.getDeclaredFields();**//获取类中所有的属性**
+   for(Field fields : field1){
+	   System.out.println(fields);**//隐式的调用了toString方法**
+	   System.out.println(fields.getModifiers() + "\t" + fields.getType() + "\t" + fields.getName());
+   }
+   System.out.println("------------------------------------------------------");
+   **//3.获取类的方法信息**
+   Method[] methods = c.getDeclaredMethods();**//获取本类中的公共方法对象**
+   for(Method method: methods){
+	   //System.out.println(method);
+	   System.out.println("访问权限:" + method.getModifiers());
+	   System.out.println("返回值类型:" + method.getReturnType());
+	   System.out.println("方法的名称:" + method.getName());
+	   **//获取方法的参数**
+	   Class[] cPara =  method.getParameterTypes();
+	   for(Class para : cPara){
+		   System.out.println(para.getTypeName());
+	   }
+   }
+   System.out.println("----------------------------------------------");
+   **//4.获取类的构造器**
+   Constructor[] cons = c.getConstructors();
+   for(Constructor con : cons){
+	  System.out.println(con.getName());
+	  System.out.println(con);
+   }
+   **//获取指定的构造方法**
+   System.out.println("==================================");
+   Constructor conns = c.getConstructor(null);
+   System.out.println(conns);
+   Constructor conn = c.getConstructor(String.class, int.class, String.class);
+   System.out.println(conn);
+}
+}

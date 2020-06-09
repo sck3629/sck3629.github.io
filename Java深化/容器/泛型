@@ -1,0 +1,58 @@
+#### 1.为什么需要使用泛型 
+
+起因：JDK1.4 以前类型不明确：装入集合的类型都被当作 Object 对待，从而失去自己的实际类型。 
+
+从集合中取出时往往需要转型，效率低，容易产生错误。 
+
+解决办法：泛型，在定义集合的时候同时定义集合中对象的类型 
+
+好处：增强程序的可读性和安全性 
+
+#### 2.泛型的分类 
+
+#### (1)泛型类 
+
+public class MyGeneric<T> {
+
+}
+class TestMyGeneric {
+	public static void main(String[] args) {
+		MyGeneric<String> mg = new MyGeneric<String>();//这个T在创建对象时确定
+		MyGeneric<char[]> mg1 = new MyGeneric<char[]>();
+	}
+}
+
+#### (2)泛型接口
+
+ public interface MyInterface<T> {
+
+}
+class MyImplement implements MyInterface<String> {//已知泛型T为String类型，则实现类就是String类型的
+	
+}
+class MyImplement1<T> implements MyInterface<T> {//不知道泛型T的类型，则实现类也必须是泛型，且实现类的类型在创建对象时声明
+	
+}
+class Test {
+	public static void main(String[] args) {
+		MyImplement mi = new MyImplement();
+		MyImplement1<Integer> m1 = new MyImplement1<Integer>();
+	}
+}
+
+#### (3)泛型方法
+
+public class MyMethod<T> {
+
+  public void show(T t){//这个T在创建MyMethod对象时决定
+	  System.out.println(t);
+  }
+  public <Q> void method(Q q) {//这个Q在方法调用时决定
+	  System.out.println(q);
+  }
+  public <K> void show(K...k) {
+	  for(int i = 0; i<k.length; i++) {
+		  System.out.println(k[i]);
+	  }
+  }//可变参数的泛型方法
+}

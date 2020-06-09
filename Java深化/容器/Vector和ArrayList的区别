@@ -1,0 +1,11 @@
+底层数据结构相同，都是 Object 类型的数组
+
+(1) Vector 的 add()方法是同步方法,ArrayList 的 add() 方法是非同步方法 
+
+(2) Vector 扩容每次扩充 1 倍 ,ArrayList 每次扩充 0.5倍 
+
+(3) Vector是在调用构造方法时，直接初始化容量为10， ArrayList 是在第一次调用添加方法时,初始化容量为10
+
+(4) Vector 的版本是 JDK1.0,ArrayList，JDK1.2版
+
+(5) Vector 是 线 程 同 步 的 ，安 全 性 高，效 率 低 ， ArrayList 是非线程同步的，安全性低，效率高

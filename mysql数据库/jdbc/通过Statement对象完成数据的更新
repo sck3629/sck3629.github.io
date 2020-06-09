@@ -1,0 +1,32 @@
+public void updateDepartments(String department_name, int location_id, int department_id){
+    	 Connection conn = null;
+    	 Statement state = null;
+    	 try{
+    		 Class.forName("com.mysql.jdbc.Driver");
+    		 conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bjsxt?useUnicode=true&characterEncoding=utf-8&useSSL=false", "root", "123456");
+    		 **String sql = "update departments d set d.department_name = '"+department_name+"',d.location_id = 8 where d.department_id = 6";**
+    		 state = conn.createStatement();
+    		 int flag = state.executeUpdate(sql);
+    		 System.out.println(flag);
+    	 }catch(Exception e){
+    		 e.printStackTrace();
+    	 }finally{
+    		 if(state!= null){
+    			 try {
+					state.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		 }
+    		 if(conn!= null){
+    			 try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		 }
+    	 }
+     }
+

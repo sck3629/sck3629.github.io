@@ -1,0 +1,25 @@
+**使用** **Reader** **读取文件内容** 
+
+1) int read( ); 
+
+2) int read( char [ ]cbuf ); 
+
+3) int read( char [ ]cbuf, int off, int len ); 
+
+4) int available( ); 
+
+5) close( ); 
+
+**使用** **Writer** **写内容到文件** 
+
+1) void write( int c ); 
+
+2) void write( char[]cbuf); 
+
+3) abstract void write( char [ ]cbuf, int off, int len ); 
+
+4) void write(String str); 
+
+5) abstract void flush( ); 
+
+6) void close( );

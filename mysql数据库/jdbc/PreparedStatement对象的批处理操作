@@ -1,0 +1,36 @@
+**//批量添加**
+     public void addBatch(List<Departments> list){
+    	 Connection conn = null;
+    	 PreparedStatement ps = null;
+    	 try{
+    		 conn = JdbcUtil.getConnection();
+    		 ps = conn.prepareStatement("insert into departments values(default,?,?)");
+    		 for(int i = 0; i < list.size(); i++){
+    			 ps.setString(1, list.get(i).getDepartmentName());
+    			 ps.setInt(2, list.get(i).getLocationId());
+    			 **//将绑定好参数的sql语句添加到批处理当中**
+    			 **ps.addBatch();**
+    		 }
+    		 **//执行批处理**
+    		 **int[] arr =ps.executeBatch();**
+    		 System.out.println(arr.length);
+    	 }catch(Exception e){
+    		 e.printStackTrace();
+    	 }finally{
+    		 JdbcUtil.releaseResource(ps, conn, null);
+    	 }
+     }
+
+
+
+public static void main(String[] args) {
+		PreparedStatementDemo demo = new PreparedStatementDemo();
+		List<Departments> list = new ArrayList<>();
+		for(int i = 0;i < 10; i++){
+			Departments dept = new Departments();
+			dept.setDepartmentName("人力" + i);
+			dept.setLocationId(20 + i);
+			list.add(dept);
+		}
+		demo.addBatch(list);
+    

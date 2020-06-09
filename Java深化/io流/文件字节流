@@ -1,0 +1,25 @@
+**FileInputStream/FileOutputStream** 
+
+**使用** **FileInputStream** **读取文件内容** 
+
+1) abstract int read( ); 
+
+2) int read( byte b[ ] ); 
+
+3) int read( byte b[ ], int off, int len ); 
+
+4) int available( ); 
+
+5) close( ); 
+
+**使用** **FileOutputStream** **写内容到文件** 
+
+1) abstract void write( int b ); 
+
+2) void write( byte b[ ] ); 
+
+3) void write( byte b[ ], int off, int len ); 
+
+4) void flush( ); 
+
+5) void close( );

@@ -1,0 +1,19 @@
+**1.IOUtils 与 FileUtils** 
+
+Commons IO 是 apache 的一个开源的工具包,封装了 IO操作的相关类,使用 Commons IO 可以很方便的读写文件
+
+(1) FileUtils 中提供了许多设计文件操作的 已封装好的方法。 
+
+(2) IOUtils 则是提供了读写文件的方法 
+
+**2.IOUtils 工具类操作的相关方法** 
+
+(1)String IOUtils.toString(InputStream input)传入输入流对象,返回字符串 
+
+**3.FileUtils 工具类操作的相关方法** 
+
+(1)String FileUtils.readFileToString(File file,String encoding)FileUtils.writeStringToFile(File file,String data,String encoding)读写文件 
+
+(2)FileUtils.copyFile(File srcFile,File destFile)复制文件 
+
+(3)FileUtils.copyURLToFile(URL source,File destination)复制url 对象到指定文件

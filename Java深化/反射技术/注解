@@ -1,0 +1,21 @@
+package com.bjsxt.test;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class TestAnnotation {
+   **@Override//标识的方法是重写的方法**
+   public String toString(){
+	   return null;
+   }
+	**@Deprecated//标识的方法不建议使用**
+	public void show(){
+		Date date = new Date();
+		System.out.println(date.getYear());
+	}
+	**@SuppressWarnings("all")//用来抑制编译时警告的信息**
+	public void method(){
+		List list = new ArrayList();
+	}
+}

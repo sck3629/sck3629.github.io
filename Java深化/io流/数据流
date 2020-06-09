@@ -1,0 +1,9 @@
+**DataInputStream** **和** **DataOutputStream** 
+
+1) 提供了可以存取所有 Java 基础类型数据（如：int，double等）和 String 的方法。 
+
+2) 处理流，只针对字节流，二进制文件 
+
+3) 输入流链和输出流链 
+
+4) 注意：只要关闭上层流即可
